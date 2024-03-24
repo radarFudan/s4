@@ -20,7 +20,7 @@ model:
     bidirectional: true
     n_ssm: 1
     dt_transform: softplus
-    real_transform: exp
+    real_transform: best
 
 dataset:
   grayscale: true

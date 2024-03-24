@@ -1,43 +1,45 @@
 # @package _global_
 defaults:
-  - /pipeline: cifar
+  - /pipeline: listops
   - /model: s4
   - override /scheduler: cosine_warmup
 
 model:
-  dropout: 0.1
-  tie_dropout: true
+  dropout: 0.
   n_layers: 6
-  d_model: 512
+  d_model: 256
   prenorm: false
   norm: batch
   layer:
-    d_state: 64
-    lr: 0.001
+    d_state: 4
+    lr:
+      dt: null
+      A: 0.001
+      B: 0.001
     dt_min: 0.001
     dt_max: 0.1
     init: legs
     bidirectional: true
     n_ssm: 1
     dt_transform: softplus
-    real_transform: exp
+    real_transform: best
 
-dataset:
-  grayscale: true
+decoder:
+  mode: pool
 
 loader:
-  batch_size: 50
+  batch_size: 32
 
 optimizer:
   lr: 0.01
   weight_decay: 0.05
 
-trainer:
-  max_epochs: 200
-
 scheduler:
-  num_training_steps: 180000  # 200 epochs
-  num_warmup_steps: 18000
+  num_training_steps: 120000
+  num_warmup_steps: 12000
+
+trainer:
+  max_epochs: 40
 
 train:
-  seed: 2222
+  seed: 3333

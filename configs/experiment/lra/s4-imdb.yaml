@@ -24,6 +24,8 @@ model:
     init: legs
     bidirectional: true
     n_ssm: 1
+    dt_transform: softplus
+    real_transform: exp
 
 dataset:
   l_max: 4096

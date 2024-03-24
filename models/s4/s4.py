@@ -635,6 +635,9 @@ def inv_transform(param, transform='none'):
         return torch.logit(param)
     elif transform == 'softplus':
         return torch.log(torch.exp(param)-1)
+    elif transform == 'best':
+        param = torch.clamp(param, max=1-1e-5)
+        return torch.sqrt(1/param-1)
     else: raise NotImplementedError
 
 def param_transform(param, transform='none'):
@@ -650,6 +653,8 @@ def param_transform(param, transform='none'):
         p = F.sigmoid(param)
     elif transform == 'softplus':
         p = F.softplus(param)
+    elif transform == 'best':
+        p = 1 / (1 + torch.pow(param, 2))
     else: raise NotImplementedError
     return p
 
