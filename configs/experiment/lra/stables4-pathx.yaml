@@ -23,7 +23,7 @@ model:
     bidirectional: true
     n_ssm: null
     dt_transform: softplus
-    real_transform: exp
+    real_transform: best
 
 loader:
   batch_size: 16
