@@ -68,7 +68,8 @@ class IMDB(SequenceDataset):
         dataset_train, self.dataset_test = dataset["train"], dataset["test"]
         if self.val_split == 0.0:
             # Use test set as val set, as done in the LRA paper
-            self.dataset_train, self.dataset_val = dataset_train, None
+            # self.dataset_train, self.dataset_val = dataset_train, None
+            self.dataset_train, self.dataset_val = dataset_train, self.dataset_test
         else:
             train_val = dataset_train.train_test_split(
                 test_size=self.val_split, seed=self.seed
@@ -521,7 +522,8 @@ class AAN(SequenceDataset):
             # 'max_vocab': 100, # Full size 98
             "append_bos": False,
             "append_eos": True,
-            "n_workers": 4,  # For tokenizing only
+            # "n_workers": 4,  # For tokenizing only
+            "n_workers": 1,  # For tokenizing only
         }
 
     @property
